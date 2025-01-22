@@ -1,0 +1,390 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    direction: rtl;
+    text-align: center;
+    background-color: #eaf8f8;
+}
+
+/* الافتراضي عند الكتابة يدويًا */
+#textInput::selection {
+    background-color: #007bff;
+    color: white;
+}
+
+/* عندما يكون النص مخفيًا */
+#textInput.hidden-text::selection {
+    background-color: transparent;
+    color: transparent;
+}
+
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+.logo {
+    text-align: left;
+    padding: 10px;
+}
+
+.logo h1 {
+    color: #000;
+    font-size: 24px;
+    margin: 0;
+}
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 100px;
+}
+
+.grandpa {
+    order: 2;
+}
+
+.grandpa img {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.speech-bubble {
+    order: 1;
+    position: relative;
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    width: 80%;
+    max-width: 400px;
+    margin: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.speech-bubble:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-top-color: #fff;
+    border-bottom: 0;
+    margin-left: -15px;
+    margin-bottom: -15px;
+}
+
+.speech-bubble p {
+    font-size: 20px;
+    font: bolder;
+    line-height: 1.5;
+    color: #333;
+}
+
+
+.link {
+    order: 3;
+}
+
+.start-button {
+    background-color: #4173a5;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.start-button:hover {
+    background-color: skyblue;
+}
+
+.submitButton:hover {
+    background-color: skyblue;
+}
+
+
+/*Prompt page*/
+.container2 {
+    max-width: 800%;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 200px;
+    margin-top: 100px;
+}
+
+.container3 {
+
+    margin: 100px;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    margin-top: 100px;
+}
+
+
+.story-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.grandpa2 img {
+
+    width: 400px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.textbox1 {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 300px;
+    align-items: center;
+}
+
+
+.textbox1 input[type="text"] {
+    width: 400px;
+    height: 200px;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+/*Header css*/
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 2px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+    margin-bottom: 30px;
+}
+
+header .logo {
+    font-size: 2.5rem;
+    color: #333;
+    font-weight: bolder;
+    float: right;
+    padding-left: 50px;
+}
+
+.logo img {
+    max-height: 50px;
+    width: auto;
+    display: inline-block;
+    padding-right: 0%;
+}
+
+header .logo span {
+    color: skyblue;
+}
+
+header .navbar a {
+    font-size: 1.2rem;
+    padding: 10px;
+    color: #666;
+}
+
+header .navbar a:hover {
+    color: skyblue;
+}
+
+/* ending header style*/
+
+
+/* Style the label */
+label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+/* Style the select dropdown */
+#ageCategory {
+    width: 90%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    appearance: none;
+    cursor: pointer;
+}
+
+/*Hover effect for dropdown */
+#ageCategory:hover {
+    border-color: skyblue;
+}
+
+/*starting loader */
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+
+}
+
+.loader-container.fade-out {
+    top: -120%;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loader-container img {
+    animation: spin 1s linear infinite;
+}
+
+#selectDescriptionButton:hover {
+    background-color: #4173a5;
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#submitButton {
+    padding: 15px 30px;
+    background-color: #4173a5;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#submitButton:hover {
+    background-color: skyblue;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+#submitButton:active {
+    background-color: #4173a5;
+    transform: scale(1);
+}
+
+#showOptionsButton {
+    padding: 12px 25px;
+    background-color: #4173a5;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#showOptionsButton:hover {
+    background-color: skyblue;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+#showOptionsButton:active {
+    background-color: #4173a5;
+    transform: scale(1);
+}
+
+
+.optionButton {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px;
+    background-color: #4173a5;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.optionButton:hover {
+    background-color: skyblue;
+    transform: scale(1.05);
+}
+
+.optionButton:active {
+    background-color: #4173a5;
+}
+
+#optionsPanel {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 2px solid black;
+    z-index: 1000;
+    text-align: center;
+    max-height: 80vh;
+    overflow-y: auto;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/*ending loader */

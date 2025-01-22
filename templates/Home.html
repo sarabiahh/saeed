@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الجد سعيد</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+
+<body>
+    <header>
+        <a href="#" class="logo">
+            <img src="static/images/GP2logo.jpg" alt="Saeed logo" />
+        </a>
+        <nav class="navbar">
+            <a href="/">الصفحة الرئيسية</a>
+            <a href="/prompt">أنشئ قصتك</a>
+        </nav>
+
+
+
+    </header>
+
+    <div class="container">
+
+        <div class="content">
+            <div class="grandpa">
+                <img src="static/images/grandpa.PNG" alt="الجد سعيد">
+            </div>
+            <div class="speech-bubble">
+                <p>مرحباً ! أنا الجد سعيد، وأنا هنا لمساعدتك في إنشاء قصص ممتعة ومميزة.</p>
+            </div>
+            <a href="{{ url_for('prompt') }}" class="link">
+                <button class="start-button">هيا لنبدأ!</button>
+            </a>
+
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>

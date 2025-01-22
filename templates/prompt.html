@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+
+<body>
+    <header>
+        <a href="#" class="logo">
+            <img src="static/images/GP2logo.jpg" alt="Saeed logo" />
+        </a>
+        <nav class="navbar">
+            <a href="/">الصفحة الرئيسية</a>
+            <a href="/prompt">أنشئ قصتك</a>
+        </nav>
+    </header>
+
+  <div class="story-container"> <!-- NEW CONTAINER START -->
+    <div class="container2">
+        <div class="textbox1">
+
+            <!-- زر "إظهار الخيارات" -->
+            <button id="showOptionsButton" style="margin-bottom: 10px; ">العناوين المقترحة</button>
+
+            <form id="storyForm">
+                <textarea id="textInput" rows="10" cols="50"
+                    style="direction: rtl; text-align: right; color: transparent; background-color: white;caret-color: transparent;"
+                    placeholder="اذا اردت مساعدتي في انشاء قصتك، يمكنك وصفها بالطريقه التاليه لتحصل على قصه رائعه!   
+
+أريد قصة عن [الموضوع الرئيسي]. الشخصية الرئيسية هي [اسم الشخصية أو وصفها]. تجري أحداث القصة في [المكان]. في القصة، [ما الذي يحدث؟]. في النهاية، [كيف تنتهي القصة؟]."></textarea>
+                <br><br>
+                <label for="ageCategory">العمر:</label><br>
+                <select id="ageCategory">
+                    <option value="1-3">1-3</option>
+                    <option value="4-6">4-6</option>
+                    <option value="7-10">7-10</option>
+                </select><br><br>
+                <button type="button" id="submitButton">هيا لنبدأ!</button>
+                <div id="loader" class="loader-container" style="display: none;">
+                    <img src="static/images/loading.png" width="100" alt="Loading...">
+                </div>
+            </form>
+        </div>
+
+        <div class="grandpa2">
+            <div class="speech-bubble">
+                <p>يمكنك اختيار عنوان القصة بالضغط على زر "أظهر العناوين المقترحة"، أو يمكنك كتابة وصف القصة في مربع
+                    النص. بعد ذلك، اختر العمر المناسب، ثم اضغط على "هيا لنبدأ" لنبني معًا قصة جميلة.</p>
+            </div>
+            <img src="static/images/grandpa.PNG" alt="الجد سعيد">
+        </div>
+    </div>
+
+</div> <!-- NEW CONTAINER END -->
+
+    <!-- لوحة الخيارات -->
+    <div id="optionsPanel"
+        style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border: 2px solid black; z-index: 1000; text-align: center;">
+        <h3>اختر عنوانًا:</h3>
+
+        <button class="optionButton"
+            data-description="أريد قصة عن الصداقة. الشخصية الرئيسية هي طفل صغير يُدعى علي. تجري أحداث القصة في الحديقة.  في القصة، يلتقي علي بطفل جديد في الحي ويحاولان اللعب معًا، لكن كل منهما يريد اللعب بلعبته فقط.  في النهاية، يتشاركان اللعب ويصبحان صديقين.">
+            علي وصديقه الجديد
+        </button>
+        <button class="optionButton"
+            data-description="أريد قصة عن مساعدة الآخرين.الشخصية الرئيسية هي قطة صغيرة تُدعى لولو.  تجري أحداث القصة في الشارع. في القصة، ترى لولو عصفورًا صغيرًا عالقًا في عش مكسور وتحاول مساعدته.  في النهاية، تنجح في إنقاذ العصفور بمساعدة قطة كبيرة">
+            القطة لولو والعصفور
+        </button>
+        <!-- قصة عن مشاركة الأشياء -->
+        <button class="optionButton"
+            data-description="أريد قصة عن مشاركة الأشياء. الشخصية الرئيسية هي طفل يُدعى خالد. تجري أحداث القصة في غرفة الألعاب. في القصة، يرفض خالد أن يعطي شقيقته الصغيرة لعبة كان يلعب بها، فتبدأ بالبكاء. في النهاية، يشعر خالد بالحزن لرؤيتها تبكي، فيقرر مشاركة لعبته معها، ويكتشفان أن اللعب معًا أكثر متعة.">
+            خالد وشقيقته الصغيرة
+        </button>
+
+        <!-- قصة عن التعلم من الأخطاء -->
+        <button class="optionButton"
+            data-description="أريد قصة عن التعلم من الأخطاء. الشخصية الرئيسية هي أرنب صغير يُدعى باسم. تجري أحداث القصة في الحقل. في القصة، يقطف باسم الجزر دون أن يسأل والدته، لكنه يكتشف أنه أفسد نباتات أخرى. في النهاية، يعتذر لوالدته ويتعلم أن يسأل قبل أن يفعل شيئًا.">
+            باسم ووالدته
+        </button>
+
+        <!-- قصة عن التعاون -->
+        <button class="optionButton"
+            data-description="أريد قصة عن التعاون. الشخصية الرئيسية هي مجموعة من الطيور الصغيرة. تجري أحداث القصة في الغابة. في القصة، تحاول الطيور بناء عش كبير لكنها تواجه صعوبة. في النهاية، تتعاون معًا وتنجح في بناء العش.">
+            مجموعة الطيور
+        </button>
+
+        <!-- قصة عن فقدان شيء مهم -->
+        <button class="optionButton"
+            data-description="أريد قصة عن فقدان شيء مهم. الشخصية الرئيسية هي طفل يُدعى سامي. تجري أحداث القصة في المدرسة. في القصة، يفقد سامي حقيبته ويبحث عنها في كل مكان بمساعدة أصدقائه. في النهاية، يجد الحقيبة في المكان الذي نسيها فيه، ويشكر أصدقاءه على مساعدتهم.">
+            سامي وأصدقاؤه
+        </button>
+
+        <!-- قصة عن مساعدة الأسرة -->
+        <button class="optionButton"
+            data-description="أريد قصة عن مساعدة الأسرة. الشخصية الرئيسية هي طفلة تُدعى ليلى. تجري أحداث القصة في المطبخ. في القصة، تحاول ليلى مساعدة والدتها في إعداد الطعام لكنها تسكب العصير بالخطأ. في النهاية، تعلمها والدتها الطريقة الصحيحة وتنجح في المساعدة.">
+            ليلى ووالدتها
+        </button>
+
+        <!-- قصة عن الاعتذار -->
+        <button class="optionButton"
+            data-description="أريد قصة عن الاعتذار. الشخصية الرئيسية هي دب صغير يُدعى دبدوب. تجري أحداث القصة في الغابة. في القصة، يأخذ دبدوب لعبة صديقه دون أن يطلب الإذن، مما يغضب صديقه. في النهاية، يعيد دبدوب اللعبة ويعتذر لصديقه، ويعودان للعب معًا.">
+            دبدوب وصديقه
+        </button>
+
+        <!-- قصة عن التغلب على الخوف -->
+        <button class="optionButton"
+            data-description="أريد قصة عن التغلب على الخوف. الشخصية الرئيسية هي طفل يُدعى عمر. تجري أحداث القصة في مسبح صغير. في القصة، يخاف عمر من الماء ولا يريد السباحة مع أصدقائه. في النهاية، بمساعدة مدربه وأصدقائه، يجرب السباحة ويكتشف أنها ممتعة.">
+            عمر والسباحة
+        </button>
+
+        <!-- قصة عن حب الطبيعة -->
+        <button class="optionButton"
+            data-description="أريد قصة عن حب الطبيعة. الشخصية الرئيسية هي طفلة تُدعى سارة. تجري أحداث القصة في الحديقة. في القصة، ترى سارة زهرة جميلة وتفكر في قطفها، لكن والدتها تخبرها عن أهمية ترك الزهور لتنمو. في النهاية، تقرر سارة العناية بالحديقة وزرع المزيد من الزهور بدلاً من قطفها.">
+            سارة والزهور
+        </button>
+
+        <br><br>
+
+        <button id="selectDescriptionButton"
+            style="padding: 10px 20px; background-color: #28a745; color: white; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s ease-in-out; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            أريد هذا العنوان
+        </button>
+        <button id="closeButton"
+            style="position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 20px; font-weight: bold; color: #333; cursor: pointer;">&times;</button>
+
+    </div>
+
+
+    <script>
+        document.getElementById('showOptionsButton').addEventListener('click', () => {
+            const optionsPanel = document.getElementById('optionsPanel');
+            optionsPanel.style.display = 'block';
+        });
+
+        document.getElementById('textInput').addEventListener('input', () => {
+            // عند الكتابة يدويًا، يظهر النص
+            const textInput = document.getElementById('textInput');
+            textInput.style.color = 'black'; // عرض النص المكتوب
+            textInput.classList.remove('hidden-text');
+            textInput.readOnly = false;
+        });
+
+        const optionButtons = document.querySelectorAll('.optionButton');
+        const textInput = document.getElementById('textInput');
+        let selectedDescription = '';
+
+        optionButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                selectedDescription = button.dataset.description;
+                textInput.value = '';
+
+                // إعادة ضبط أنماط الأزرار
+                optionButtons.forEach(btn => {
+                    btn.style.fontWeight = 'normal';
+                    btn.style.backgroundColor = '#007bff'; // لون الخلفية الأساسي
+                    btn.style.color = 'white'; // لون النص الأساسي
+                });
+
+                // تمييز الزر المختار
+                button.style.fontWeight = 'bold';
+                button.style.backgroundColor = '#28a745'; // لون الخلفية عند التحديد
+                button.style.color = 'white';
+
+                // وضع النص المختار في مربع النص وإخفاؤه
+                textInput.value = selectedDescription;
+                textInput.style.color = 'transparent'; // إخفاء النص في مربع النص
+                textInput.classList.add('hidden-text');
+                textInput.readOnly = true;
+            });
+        });
+
+        document.getElementById('closeButton').addEventListener('click', () => {
+            const optionsPanel = document.getElementById('optionsPanel');
+            optionsPanel.style.display = 'none';
+        });
+
+        document.getElementById('selectDescriptionButton').addEventListener('click', () => {
+            if (selectedDescription) {
+                textInput.value = selectedDescription;
+                textInput.style.color = 'transparent';
+                document.getElementById('optionsPanel').style.display = 'none';
+            } else {
+                alert('يرجى اختيار وصف أولاً!');
+            }
+        });
+
+
+        document.getElementById('submitButton').addEventListener('click', async () => {
+            const textInput = document.getElementById('textInput').value;
+            const ageCategory = document.getElementById('ageCategory').value;
+            const loader = document.getElementById('loader'); //Get the loader element
+
+            loader.style.display = 'flex'; //Show loader
+
+            try {
+                //Step 1: Generate the story
+                const storyResponse = await fetch('/generateStory', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text: textInput, age: ageCategory }),
+                });
+
+                if (!storyResponse.ok) {
+                    const errorText = await storyResponse.text();
+                    console.error('Error generating story:', errorText);
+                    alert('Error generating story: ' + errorText);
+                    return;
+                }
+
+                const storyData = await storyResponse.json();
+                const story = storyData.story;
+                const storyScenes = story.split('\n\n'); //Split into scenes for display
+                localStorage.setItem('storyScenes', JSON.stringify(storyScenes)); //Store story in localStorage
+
+                //Step 2: Generate the image
+                const imageResponse = await fetch('/generateImageFromStory', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ story: story }), //Send the generated story to generate an image
+                });
+
+                if (!imageResponse.ok) {
+                    const errorText = await imageResponse.text();
+                    console.error('Error generating image:', errorText);
+                    alert('Error generating image: ' + errorText);
+                    return;
+                }
+
+                const imageData = await imageResponse.json();
+                const imageUrls = imageData.image_urls;
+                localStorage.setItem('imageUrls', JSON.stringify(imageUrls)); //Store image URLs in localStorage
+
+                //Redirect to book.html
+                window.location.href = '/book';
+            } catch (error) {
+                console.error('Request error:', error);
+                alert('Failed to generate story or image.');
+            } finally {
+                loader.style.display = 'none'; //Hide loader
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

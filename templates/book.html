@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/style2.css">
+</head>
+
+<body>
+    <header>
+        <a href="#" class="logo">
+            <img src="static/images/GP2logo.jpg" alt="Saeed logo" />
+        </a>
+        <nav class="navbar">
+            <a href="/">الصفحة الرئيسية</a>
+            <a href="/prompt">أنشئ قصتك</a>
+        </nav>
+    </header>
+
+    <div class="container3">
+        <div class="book">
+            <div class="bookContainer">
+
+                <div class="page left-page" style="background-color: white;">
+                    <div class="page-content" id="story-image-container">
+                        <!--The generated image will be displayed here -->
+                    </div>
+                </div>
+                <div class="page right-page">
+                    <div class="page-content" id="story-content">
+                        <!--The story will be displayed here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--Grandpa image and speech bubble -->
+        <div class="grandpa2">
+            <div class="speech-bubble">
+                <p>هاهي قصتك المميزه، آمل أن تستمتع بقراءتها!</p>
+            </div>
+            <img src="static/images/grandpa.PNG" alt="الجد سعيد">
+        </div>
+
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            console.log(localStorage.getItem('storyScenes'));
+            console.log(localStorage.getItem('imageUrls'));
+
+            //Retrieve story scenes and image URLs from localStorage
+            const storyScenes = JSON.parse(localStorage.getItem('storyScenes')) || [];
+            const imageUrls = JSON.parse(localStorage.getItem('imageUrls')) || [];
+            const storyContentContainer = document.getElementById('story-content');
+            const storyImageContainer = document.getElementById('story-image-container');
+
+            //Check if story scenes are available
+            if (storyScenes.length === 0) {
+                alert('No story found! Please generate a story first.');
+                window.location.href = '/prompt'; //Redirect back to prompt.html
+                return;
+            }
+
+            //Display the story
+            const storyText = storyScenes.join('<br><br>'); //Add spacing between scenes
+            storyContentContainer.innerHTML = `<p>${storyText}</p>`;
+
+            //Display the image
+            if (imageUrls.length > 0) {
+                const imgElement = document.createElement('img');
+                imgElement.src = imageUrls[0]; //Use the first image URL
+                imgElement.alt = "Generated Story Image";
+                storyImageContainer.appendChild(imgElement);
+            } else {
+                console.warn('No images found in localStorage.');
+            }
+        });
+
+    </script>
+</body>
+
+</html>
