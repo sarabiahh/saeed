@@ -1,14 +1,12 @@
 from flask_cors import CORS
-
-
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, Response
 import openai
+import json
 
 app = Flask(__name__)
 CORS(app)
-  #Enable CORS for all routes
-import os
-openai.api_key = "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"
+
+openai.api_key = "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"
 
 @app.route("/")
 def home():
@@ -24,13 +22,44 @@ def book():
 
 @app.route('/generateStory', methods=['POST'])
 def generate_story():
-    
-        data = request.get_json()  #Extract JSON from the request
 
+        data = request.get_json()  #Extract JSON from the request
         user_input = data['text']
+
+        # Validation: Check for English input
+        import re
+        if re.search(r'[a-zA-Z]', user_input):
+            return Response(
+                json.dumps({"error": "لمساعدتي في انشاء قصتك ادخل وصف القصة باللغة العربية."}, ensure_ascii=False),
+                content_type="application/json; charset=utf-8",
+                status=400,
+            )
+
+        # Check for less than 3 Arabic letters
+        if re.match(r'^[\u0600-\u06FF]+$', user_input):  # Input is entirely Arabic letters
+            if len(user_input) < 3:  # If fewer than 3 letters
+                return Response(
+                json.dumps({"error": ".الرجاء ادخال وصف القصة بأكثر من حرفين"}, ensure_ascii=False),
+                content_type="application/json; charset=utf-8",
+                status=400,
+            )
+
+        # Check for more than one Arabic word
+        arabic_words = re.findall(r'[\u0600-\u06FF]+', user_input)  # Find all Arabic words
+        if len(arabic_words) < 2:  # Less than two words
+            return Response(
+                json.dumps({"error": ".الرجاء إدخال أكثر من كلمة واحدة لوصف القصة"}, ensure_ascii=False),
+                content_type="application/json; charset=utf-8",
+                status=400,
+            )
+
+
+
+
+
+
         user_age = data['age']
-        Explanation = "'أريد أن تبدأ الحوارات في القصة باسم القائل، ثم الكلام، مثل: قال علي 'مرحبًا! كيف حالك؟"    
-        
+        Explanation = "'أريد أن تبدأ الحوارات في القصة باسم القائل، ثم الكلام، مثل: قال علي 'مرحبًا! كيف حالك؟"
         ageImpact = ""
         if user_age == "1-3":
             ageImpact = "أكتب قصة قصيرة للأطفال من عمر 1 إلى 3 سنوات، تحتوي على 120-150 كلمة. يجب أن تكون القصة بسيطة جدًا، مترابطة، ومتسلسلة بشكل طبيعي. ركز على حدث واحد رئيسي فقط يمكن للأطفال فهمه بسهولة. تجنب التفاصيل الكثيرة أو التعقيد. اجعل اللغة سهلة ومباشرة، واستخدم مصطلحات يسهل على الأطفال فهمها، مع نهاية واضحة وسعيدة. اكتب العنوان مباشرةً ثم نص القصة دون إضافات مثل (عنوان القصة:) أو (العنوان:). يجب أن تكون القصة باللغة العربية الفصحى، صحيحة لغويًا ونحويًا وإملائيًا، ومناسبة لسردها للأطفال."
@@ -61,23 +90,23 @@ def generate_image_from_story():
 
     story_content = data['story']  #Original story
     max_length = 150  #Max length for summarization
-    
+
     #Step 1: Translate the story to English
     story_translated = translate_to_english(story_content)
-    
+
     #Step 2: Summarize the story
     story_summarized = summarize_text(story_translated, max_length=max_length)
-    
+
     #Step 3: Generate Image based on the summarized story
     prompt = (
         f"illustrate an anime-style image representing the following story with FOUR panels, visually representing the key events of the story. "
         f"The image should capture the key events of the story with expressive characters, vibrant settings, and detailed visuals.  "
-        f"Ensure the art style is warm, friendly, and suitable for young children. " 
+        f"Ensure the art style is warm, friendly, and suitable for young children. "
         f"Ensure the style is playful and suitable for children, resembling classic illustrated storybooks. "
         f"DO NOT INCLUDE ANY TEXT, SPEECH BUBBLES, WORDS, EXPRESSIONS OR CAPTIONS. USE PURELY VISUAL STORYTELLING TO DEPICT THE EVENTS OF THE STORY. "
         f"Story: {story_summarized}"
     )
-    
+
     image_urls = generate_image(prompt)
     if not image_urls:
         print("No image URLs generated")
