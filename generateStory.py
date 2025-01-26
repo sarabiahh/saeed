@@ -26,7 +26,7 @@ def generate_story():
         data = request.get_json()  #Extract JSON from the request
         user_input = data['text']
 
-        # Validation: Check for English input
+       # Validation: Check for English input
         import re
         if re.search(r'[a-zA-Z]', user_input):
             return Response(
@@ -35,7 +35,7 @@ def generate_story():
                 status=400,
             )
 
-        # Check for less than 3 Arabic letters
+        # Validation: Check for less than 3 Arabic letters
         if re.match(r'^[\u0600-\u06FF]+$', user_input):  # Input is entirely Arabic letters
             if len(user_input) < 3:  # If fewer than 3 letters
                 return Response(
@@ -44,11 +44,11 @@ def generate_story():
                 status=400,
             )
 
-        # Check for more than one Arabic word
-        arabic_words = re.findall(r'[\u0600-\u06FF]+', user_input)  # Find all Arabic words
-        if len(arabic_words) < 2:  # Less than two words
+        # Validation: One Arabic word
+        arabic_words = re.findall(r'[\u0600-\u06FF]+', user_input)
+        if len(arabic_words) == 1:
             return Response(
-                json.dumps({"error": ".الرجاء إدخال أكثر من كلمة واحدة لوصف القصة"}, ensure_ascii=False),
+                json.dumps({"error": ".الرجاء إدخال أكثر من كلمة واحدة أو ترك الحقل فارغًا"}, ensure_ascii=False),
                 content_type="application/json; charset=utf-8",
                 status=400,
             )
