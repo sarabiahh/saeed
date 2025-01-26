@@ -6,7 +6,7 @@ import json
 app = Flask(__name__)
 CORS(app)
 
-openai.api_key = "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"
+openai.api_key = "" #add OpenAI key here 
 
 @app.route("/")
 def home():
