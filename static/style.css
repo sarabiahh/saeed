@@ -349,24 +349,48 @@ label {
     width: 100%;
     margin: 10px 0;
     padding: 15px;
-    background-color: #4173a5;
+    background: linear-gradient(45deg, #7ecced, #dc5db2);
     color: white;
     font-size: 16px;
     font-weight: bold;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.optionButton::before {
+    content: "🚀";
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.optionButton::after {
+    content: "🎈";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 20px;
 }
 
 .optionButton:hover {
-    background-color: skyblue;
+    background: linear-gradient(45deg, #5198b7, #a95174);
     transform: scale(1.05);
 }
 
 .optionButton:active {
-    background-color: #4173a5;
+    background: linear-gradient(45deg, #277da2, #c1027b);
 }
+
+
 
 #optionsPanel {
     display: none;
