@@ -27,11 +27,17 @@
             <button id="showOptionsButton" style="margin-bottom: 10px; ">العناوين المقترحة</button>
 
             <form id="storyForm">
-                <textarea id="textInput" rows="10" cols="50"
-                    style="direction: rtl; text-align: right; color: transparent; background-color: white;caret-color: transparent;"
-                    placeholder="اذا اردت مساعدتي في انشاء قصتك، يمكنك وصفها بالطريقه التاليه لتحصل على قصة رائعه!
+<textarea id="textInput" rows="10" cols="50"
+    style="direction: rtl; text-align: right; color: transparent; background-color: white; caret-color: transparent;"
+    placeholder="إذا أردت إضافة لمساتك الخاصة وخيالك إلى القصة، يمكنك وصفها بهذه الطريقة للحصول على قصة رائعة!
 
-أريد قصة عن [الموضوع الرئيسي]. الشخصية الرئيسية هي [اسم الشخصية أو وصفها]. تجري أحداث القصة في [المكان]. في القصة، [ما الذي يحدث؟]. في النهاية، [كيف تنتهي القصة؟]."></textarea>
+أريد قصة عن [الموضوع الرئيسي].
+الشخصية الرئيسية هي [اسم الشخصية أو وصفها].
+
+مثال:
+أريد قصة عن مساعدة الآخرين.
+الشخصية الرئيسية هي علي، طفل شجاع.">
+</textarea>
                 <br><br>
                 <label for="ageCategory">العمر:</label><br>
                 <select id="ageCategory">
@@ -48,7 +54,7 @@
 
         <div class="grandpa2">
             <div class="speech-bubble">
-                <p>استمتع بتجربة فريدة لإنشاء قصتك! اختر عنوانًا من القائمة المقترحة، أو أضف وصفك الخاص في مربع النص، أو ببساطة اتركه فارغًا ودع العم سعيد يبتكر لك قصة مميزة!</p>
+                <p>استمتع بتجربة فريدة لإنشاء قصتك! اختر عنوانًا من العناوين المقترحة، أو أضف وصفك الخاص في مربع النص، أو ببساطة اترك مربع النص فارغًا وانقر على "هيا لنبدأ" ودع العم سعيد يبتكر لك قصة مميزة!</p>
             </div>
             <img src="static/images/grandpa.PNG" alt="الجد سعيد">
         </div>
@@ -120,7 +126,7 @@
         <br><br>
 
         <button id="selectDescriptionButton"
-            style="padding: 10px 20px; background-color: #28a745; color: white; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s ease-in-out; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+            style="padding: 10px 20px; background-color: #4173a5; color: white; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s ease-in-out; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
             أريد هذا العنوان
         </button>
         <button id="closeButton"
@@ -155,13 +161,13 @@
                 // إعادة ضبط أنماط الأزرار
                 optionButtons.forEach(btn => {
                     btn.style.fontWeight = 'normal';
-                    btn.style.backgroundColor = '#007bff'; // لون الخلفية الأساسي
+                    btn.style.background = 'linear-gradient(45deg, #7ecced, #dc5db2)'; // لون الخلفية الأساسي
                     btn.style.color = 'white'; // لون النص الأساسي
                 });
 
                 // تمييز الزر المختار
                 button.style.fontWeight = 'bold';
-                button.style.backgroundColor = '#28a745'; // لون الخلفية عند التحديد
+                button.style.background ='linear-gradient(45deg, #277da2, #c1027b)'; // لون الخلفية عند التحديد
                 button.style.color = 'white';
 
                 // وضع النص المختار في مربع النص وإخفاؤه
